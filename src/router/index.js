@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory } from 'vue-router'
 import ListCountries from '../components/ListCountries'
+import DetailCountry from '../components/DetailCountry'
 
 
 const routes = [
@@ -7,7 +8,14 @@ const routes = [
         path:'/',
         name :'ListCountries',
         component: ListCountries
+    },
+    {
+        path:'/country/:id',
+        name :'DetailCountry',
+        component: DetailCountry,
+        props:true
     }
+
 
 ]
 

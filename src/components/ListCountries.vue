@@ -10,7 +10,8 @@
   </section>
   <section class="countries-list">
     <div v-for="country in filteredCountries" :key="country.cioc" class="card">
-      <img :src="country.flags.png" alt="" class="card__image" />
+      <router-link :to ="{name:'DetailCountry',params:{ id:country.name}}">
+      <img :src="country.flag" alt="" class="card__image" />
       <div class="card__content">
         <h1 class="title">
           {{ country.name }}
@@ -19,6 +20,7 @@
         <p class="">Region : {{ country.region }}</p>
         <p class="">Capital :{{ country.capital }}</p>
       </div>
+      </router-link>
     </div>
   </section>
 </template>
@@ -37,9 +39,22 @@ export default {
    fetch(`https://restcountries.com/v2/all`)
                     .then(data=> data.json())
                     .then(countries=>{
-                      this.countries = countries
-                      console.log(countries)
-                    })
+                      this.countries = countries.map(country =>{
+                        return {
+                          cios: country.cios,
+                          name :country.name,
+                          flag :country.flags.png,
+                          population:country.population,
+                          region : country.region,
+                          capital:country.capital
+
+
+
+
+                        }
+                      })
+                      console.log(this.countries)
+                    }) 
                     .catch(err=>console.log(err))
   },
   computed:{
